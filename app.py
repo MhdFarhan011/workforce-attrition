@@ -14,14 +14,14 @@ st.write("An end-to-end intelligent platform with executive overview, driver ana
 # 1. Load Model, Training Data, and Default Test Data
 @st.cache_resource
 def load_assets():
-    model = joblib.load('optimized_job_change_model.pkl')
-    train_df = pd.read_csv('train.csv')
+    model = joblib.load('best_xgb_model.pkl')
+    train_df = pd.read_csv('aug_train.csv')
     if 'enrollee_id' in train_df.columns: train_df = train_df.drop(columns=['enrollee_id'])
     if 'target' in train_df.columns: train_df = train_df.drop(columns=['target'])
     
     test_df = None
-    if os.path.exists('test.csv'):
-        test_df = pd.read_csv('test.csv')
+    if os.path.exists('aug_test.csv'):
+        test_df = pd.read_csv('aug_test.csv')
     return model, train_df, test_df
 
 model, train_df, test_df = load_assets()
